@@ -15,3 +15,9 @@ variable "ssh_user" {
   description = "Usuario utilizado para acceder por ssh"
   default = "azureuser"
 }
+
+variable "rg_name" {
+    type = string
+    description = "Nombre del resource group"
+    default= "rg-tf-cp2"
+}
