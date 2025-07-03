@@ -21,3 +21,9 @@ variable "rg_name" {
     description = "Nombre del resource group"
     default= "rg-tf-cp2"
 }
+
+variable "vm_size" {
+    type = string
+    description = "Tamanho de la vm"
+    default= "Standard_B1s"
+}
