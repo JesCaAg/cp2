@@ -1,6 +1,6 @@
 // Definicion del acr
 resource "azurerm_container_registry" "acr" {
-  name                = "acr-tf-cp2"
+  name                = "acrTFcp2"
   location            = var.location
   resource_group_name = var.rg_name
   sku                 = "Basic" // Plan basico
