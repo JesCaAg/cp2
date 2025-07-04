@@ -5,6 +5,10 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name = var.rg_name
   allocation_method   = "Dynamic" // Ip dinamica
   sku                 = "Basic" // Ip basica
+
+  tags = {
+    environment = "casopractico2"
+  }
 }
 
 // Definicion de la red virtual
@@ -13,6 +17,10 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   resource_group_name = var.rg_name
   address_space       = ["10.0.0.0/16"]
+
+  tags = {
+    environment = "casopractico2"
+  }
 }
 
 // Definicion de la subred
@@ -35,4 +43,8 @@ resource "azurerm_network_interface" "nic" {
         private_ip_address_allocation = "Dynamic" // Asignacion automatica
         public_ip_address_id          = azurerm_public_ip.pip.id
     }
+
+  tags = {
+    environment = "casopractico2"
+  }
 }
