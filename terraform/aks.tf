@@ -8,7 +8,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   default_node_pool {
     name       = "default"
-    node_count = 2 // Numero de nodos
+    node_count = 1 // Numero de nodos
     vm_size    = "Standard_B2s" // Caracteristicas de los nodos del pool
   }
 
