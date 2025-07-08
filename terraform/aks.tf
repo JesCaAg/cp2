@@ -3,7 +3,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks-tf-cp2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  dns_prefix          = "aks-tf-cp2-jca" // Prefijo dns para el endpoint publico
+  dns_prefix          = "aks-tf-cp2-jca" // Prefijo dns para el acceso al aks
   sku_tier            = "Standard" // Plan escogido
 
   default_node_pool {
