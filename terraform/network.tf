@@ -11,6 +11,13 @@ resource "azurerm_public_ip" "pip" {
   }
 }
 
+data "azurerm_public_ip" "pip" { // Creado para poder sacar el output de la ip publica, mediante dependencias
+  name                = azurerm_public_ip.pip.name
+  resource_group_name = azurerm_resource_group.rg.name
+  depends_on = [
+    azurerm_linux_virtual_machine.vm
+  ]
+
 // Definicion de la red virtual
 resource "azurerm_virtual_network" "vnet" {
   name                = "vnet-tf-cp2"
@@ -47,4 +54,8 @@ resource "azurerm_network_interface" "nic" {
   tags = {
     environment = "casopractico2"
   }
+  
+  depends_on = [
+    azurerm_public_ip.pip
+  ]
 }
