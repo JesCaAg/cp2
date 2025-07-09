@@ -17,6 +17,7 @@ data "azurerm_public_ip" "pip" { // Creado para poder sacar el output de la ip p
   depends_on = [
     azurerm_linux_virtual_machine.vm
   ]
+}
 
 // Definicion de la red virtual
 resource "azurerm_virtual_network" "vnet" {
