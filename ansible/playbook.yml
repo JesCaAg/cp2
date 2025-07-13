@@ -1,5 +1,5 @@
 ---
-- name: Subir imágenes al ACR
+- name: Subir imagenes al ACR
   hosts: acr
   vars_files:
     - secrets.yml
