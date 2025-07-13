@@ -1,1 +1,11 @@
+---
+- name: Instalar podman
+  apt:
+    name: podman
+    update_cache: true
 
+- name: Login en acr
+  containers.podman.podman_login:
+    registry: "{{ acr_login_server }}"
+    username: "{{ acr_user }}"
+    password: "{{ acr_pass }}"
