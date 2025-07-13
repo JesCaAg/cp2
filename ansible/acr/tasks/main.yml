@@ -13,3 +13,13 @@
     - nginx
     - jsosa15/azure-vote-front:v1
     - bitnami/redis:6.0.8
+
+- name: Tagear imagenes
+  containers.podman.podman_tag:
+    image: "{{ item.image }}"
+    target_names:
+      - "{{ acr_login_server }}/{{ item.repo }}:casopractico2"
+  loop:
+    - { image: 'nginx', repo: 'podman/nginx' }
+    - { image: 'jsosa15/azure-vote-front:v1', repo: 'aks/front' }
+    - { image: 'bitnami/redis:6.0.8', repo: 'aks/back' }
