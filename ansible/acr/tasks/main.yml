@@ -21,5 +21,14 @@
       - "{{ acr_login_server }}/{{ item.repo }}:casopractico2"
   loop:
     - { image: 'nginx', repo: 'podman/nginx' }
-    - { image: 'jsosa15/azure-vote-front:v1', repo: 'aks/front' }
-    - { image: 'bitnami/redis:6.0.8', repo: 'aks/back' }
+    - { image: 'jsosa15/azure-vote-front:v1', repo: 'aks-front/front' }
+    - { image: 'bitnami/redis:6.0.8', repo: 'aks-back/back' }
+
+- name: Subir imagenes al acr
+  containers.podman.podman_image:
+    name: "{{ item }}"
+    push: true
+  loop:
+    - "{{ acr_login_server }}/podman/nginx:casopractico2"
+    - "{{ acr_login_server }}/aks-front/front:casopractico2"
+    - "{{ acr_login_server }}/aks-back/back:casopractico2"
