@@ -1,1 +1,8 @@
-
+---
+- name: Subir imágenes al ACR
+  hosts: acr
+  vars_files:
+    - secrets.yml
+  tasks:
+    - include_role:
+        name: acr
