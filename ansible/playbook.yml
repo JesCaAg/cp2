@@ -6,3 +6,12 @@
   tasks:
     - include_role:
         name: acr
+
+- name: Instalar Podman y desplegar Nginx en vm
+  hosts: vm
+  become: true
+  vars_files:
+    - secrets.yml
+  tasks:
+    - include_role:
+        name: vm
