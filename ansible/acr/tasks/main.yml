@@ -4,3 +4,12 @@
     registry: "{{ acr_login_server }}"
     username: "{{ acr_user }}"
     password: "{{ acr_pass }}"
+
+- name: Descargar imagenes
+  containers.podman.podman_image:
+    name: "{{ item }}"
+    pull: true
+  loop:
+    - nginx
+    - jsosa15/azure-vote-front:v1
+    - bitnami/redis:6.0.8
