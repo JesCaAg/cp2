@@ -10,9 +10,9 @@
     name: "{{ item }}"
     pull: true
   loop:
-    - nginx
-    - jsosa15/azure-vote-front:v1
-    - bitnami/redis:6.0.8
+    - docker.io/library/nginx
+    - docker.io/jsosa15/azure-vote-front:v1
+    - docker.io/bitnami/redis:6.0.8
 
 - name: Tagear imagenes
   containers.podman.podman_tag:
