@@ -5,24 +5,23 @@
     update_cache: true
     state: present
 
+- name: Instalar pip
+  apt:
+    name: python3-pip
+    update_cache: yes
+    state: present
+
+- name: Instalar librería passlib
+  pip:
+    name: passlib
+    executable: pip3
+
 - name: Login en acr
   containers.podman.podman_login:
     registry: "{{ acr_login_server }}"
     username: "{{ acr_user }}"
     password: "{{ acr_pass }}"
-
-- name: Desplegar contenedor nginx
-  containers.podman.podman_container:
-    name: nginx-server
-    image: "{{ acr_login_server }}/podman/nginx:casopractico2"
-    state: started
-    ports:
-      - "80:80"
-    volume:
-      - "/opt/nginx/html:/usr/share/nginx/html:z"
-      - "/opt/nginx/.htpasswd:/etc/nginx/.htpasswd:z"
-      - "/opt/nginx/default.conf:/etc/nginx/conf.d/default.conf:z"
-
+    
 - name: Crear directorios nginx
   file:
     path: /opt/nginx/html
@@ -31,20 +30,6 @@
     owner: root
     group: root
     mode: '0755'
-
-- name: Personalizar index
-  copy:
-    dest: /opt/nginx/html/index.html
-    content: |
-      <!DOCTYPE html>
-      <html>
-      <head><title>CP2</title></head>
-      <body>
-        <h1>Esta es la web del CP2</h1>
-        <p>Si estas viendo esto te has autenticado correctamente.</p>
-      </body>
-      </html>
-    mode: '0644'
 
 - name: Crear configuracion con autenticacion
   copy:
@@ -69,3 +54,30 @@
     name: "{{ web_user }}"
     password: "{{ web_pass }}"
     crypt_scheme: bcrypt
+
+- name: Desplegar contenedor nginx
+  containers.podman.podman_container:
+    name: nginx-server
+    image: "{{ acr_login_server }}/podman/nginx:casopractico2"
+    state: started
+    ports:
+      - "80:80"
+    volume:
+      - "/opt/nginx/html:/usr/share/nginx/html:z"
+      - "/opt/nginx/.htpasswd:/etc/nginx/.htpasswd:z"
+      - "/opt/nginx/default.conf:/etc/nginx/conf.d/default.conf:z"
+
+- name: Personalizar index
+  copy:
+    dest: /opt/nginx/html/index.html
+    content: |
+      <!DOCTYPE html>
+      <html>
+      <head><title>CP2</title></head>
+      <body>
+        <h1>Esta es la web del CP2</h1>
+        <p>Si estas viendo esto te has autenticado correctamente.</p>
+      </body>
+      </html>
+    mode: '0644'
+
