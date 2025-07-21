@@ -22,3 +22,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
     environment = "casopractico2"
   }
 }
+
+// Descarga de kubeconfig
+resource "local_file" "aks_kubeconfig" {
+  filename = pathexpand("~/.kube/config")
+  content = azurerm_kubernetes_cluster.aks.kube_config_raw
+  file_permission = "0600"
+
+  depends_on = [ azurerm_kubernetes_cluster.aks ] 
+}
